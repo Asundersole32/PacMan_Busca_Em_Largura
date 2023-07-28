@@ -174,10 +174,11 @@ def main():
     e91 = graph.add_edge(v70, v72)
     e92 = graph.add_edge(v71, v73)
 
-    Right = []
-    Left = []
-    Up = []
-    Down = []
+    Right = [e2, e6, e11]
+    Left = [e1, e4, e8, e13, e15]
+    Up = [e3, e7, e9, e14, e17]
+    Down = [e5, e10, e12, e16]
+
     graph.print_vertices()
 
     route = BFS(graph, v0)
