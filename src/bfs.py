@@ -19,7 +19,10 @@ def BFS(graph: Graph, origin: Vertex):
         discovered_vertex: Vertex = queue.popleft()
         route.append(discovered_vertex)
 
-        for vertex in discovered_vertex.vertices:
+        print(discovered_vertex.vertices)
+        print(discovered[vertex.ID])
+        for vertex in discovered_vertex.vertices[0]:
+            print(vertex)
             if not discovered[vertex.ID]:
                 discovered[vertex.ID] = True
                 queue.append(vertex)
