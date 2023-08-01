@@ -265,8 +265,10 @@ def main():
     graph.add_edge(v67, v71, L)
     graph.add_edge(v68, v70, D)
     graph.add_edge(v69, v71, D)
+    graph.add_edge(v70, v67, L)
     graph.add_edge(v70, v68, U)
     graph.add_edge(v70, v72, D)
+    graph.add_edge(v71, v67, R)
     graph.add_edge(v71, v69, U)
     graph.add_edge(v71, v73, D)
     graph.add_edge(v72, v70, U)
@@ -274,18 +276,19 @@ def main():
 
     graph.print_vertices()
 
-    def find_path(graph, start, end, path=[]):
+    def find_path(graph, start, end, path=[], directions = []):
         path = path + [start]
-        print(path)
         if start == end:
+            path = directions
             return path
         if not graph.has_key(start):
             return None
         for node in graph.get_vertex(start):
             if node[0].ID not in path:
-                print(node[0])
-                newpath = find_path(graph, node[0].ID, end, path)
-                if newpath: return newpath
+                directions.append(node[1])
+                newpath = find_path(graph, node[0].ID, end, path, directions)
+                if newpath:
+                    return newpath
         return None
 
     route = BFS(graph, v0)
@@ -294,7 +297,24 @@ def main():
         vertex_list.append(vertex.ID)
         print(f"{vertex.ID}")
 
-    print(find_path(graph, 9, 4))
+    def bfs_path(vertex_list):
+        final_directions = []
+        for i in range(len(vertex_list)):
+            if i == len(vertex_list) - 1:
+                return final_directions
+            else:
+                try:
+                    directions = find_path(graph, vertex_list[i], vertex_list[i+1])
+                    print(vertex_list[i])
+                    print(vertex_list[i+1])
+                    print(directions)
+                    final_directions.append(directions)
+                except EOFError as error:
+                    return error
+
     print(vertex_list)
+    print(vertex_list[0])
+    print(vertex_list[-1])
+    print(find_path(graph, vertex_list[0], vertex_list[-1]))
 
 main()
