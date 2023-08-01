@@ -89,20 +89,30 @@ def main():
     graph.add_edge(v0, v1, R)
     graph.add_edge(v0, v2, L)
     graph.add_edge(v0, v3, U)
+    graph.add_edge(v1, v0, L)
     graph.add_edge(v1, v4, R)
     graph.add_edge(v1, v23, D)
+    graph.add_edge(v2, v0, R)
     graph.add_edge(v2, v5, L)
     graph.add_edge(v2, v28, U)
+    graph.add_edge(v3, v0, D)
     graph.add_edge(v3, v6, R)
+    graph.add_edge(v4, v1, L)
     graph.add_edge(v4, v9, U)
     graph.add_edge(v4, v7, D)
+    graph.add_edge(v5, v2, R)
     graph.add_edge(v5, v8, L)
     graph.add_edge(v5, v29, D)
+    graph.add_edge(v6, v3, L)
     graph.add_edge(v6, v9, R)
     graph.add_edge(v6, v62, U)
+    graph.add_edge(v7, v4, U)
     graph.add_edge(v7, v10, R)
+    graph.add_edge(v8, v5, R)
     graph.add_edge(v8, v11, D)
     graph.add_edge(v8, v24, U)
+    graph.add_edge(v9, v4, D)
+    graph.add_edge(v9, v6, L)
     graph.add_edge(v9, v12, R)
     graph.add_edge(v9, v31, U)
     graph.add_edge(v10, v13, R)
@@ -183,13 +193,15 @@ def main():
 
     def find_path(graph, start, end, path=[]):
         path = path + [start]
+        print(path)
         if start == end:
             return path
         if not graph.has_key(start):
             return None
         for node in graph.get_vertex(start):
-            if node.ID not in path:
-                newpath = find_path(graph, node.ID, end, path)
+            if node[0].ID not in path:
+                print(node[0])
+                newpath = find_path(graph, node[0].ID, end, path)
                 if newpath: return newpath
         return None
 
@@ -199,7 +211,7 @@ def main():
         vertex_list.append(vertex.ID)
         print(f"{vertex.ID}")
 
-    print(find_path(graph, 4, 1))
+    print(find_path(graph, 9, 4))
     print(vertex_list)
 
 main()

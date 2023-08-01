@@ -34,7 +34,7 @@ class Graph:
     def get_vertex(self, ID: int):
         for vertex in self.vertices:
             if vertex.ID == ID:
-                return vertex
+                return vertex.vertices
         return None
 
     def has_key(self, ID: int):
